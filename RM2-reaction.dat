@@ -1,0 +1,173 @@
+!
+! A. Stagni, C. Cavallotti, S. Arunthanayothin, Y. Song,
+! O. Herbinet, F. Battin-Leclerc, T. Faravelli
+! "An experimental, theoretical and kinetic-modeling study of the gas-phase oxidation of ammonia"
+! Reaction Chemistry and Engineering (submitted) (2020).
+!
+! Kinetic mechanism of Ammonia pyrolysis and oxidation
+!
+! Submitted to Reaction Chemistry and Engineering (November 2019)
+! 
+! CHEMKIN format
+!
+ELEMENTS
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\START_SPECIES_LIST 
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+C
+H
+N
+O     
+Ar    
+He
+END
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\START_SPECIES_LIST 
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SPECIES
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\SPECIES_MODULE: \H2_O2 
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+AR         N2              HE            
+H2         H               O2            O           H2O
+OH         H2O2            HO2
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\END_SPECIES_MODULE: \H2_O2 
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\SPECIES_MODULE: \NOx_H2O2_HT
+!
+NO
+H2NN
+NH3
+N
+NH
+NNH
+NH2
+!
+!\END_SPECIES_MODULE: \NOx_H2O2_HT
+END
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\END_SPECIES_LIST 
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\START_KINETICS_INPUT
+REACTIONS
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\KINETICS_MODULE: \H2_O2 
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+H2+M<=>H+H+M                                                 +4.5770000E+019 -1.4000000E+000 +1.0440000E+005   !\AUTHOR: AK !\REF: TSANG AND HAMPSON, J. PHYS. CHEM. REF. DATA, 15:1087 (1986) !\COMMENT: 
+ H2 / 2.500 / H2O / 12.000 / HE / 0.830 / !3RD BODY COLLIDER EFFICIENCIES
+H2+O<=>H+OH                                                  +5.0800000E+004 +2.6700000E+000 +6.2920000E+003   !\AUTHOR: AK !\REF:SUTHERLAND ET AL., 21ST SYMPOSIUM, P. 929 (1986) !\COMMENT:
+H2+OH<=>H+H2O                                                +4.3800000E+013 +0.0000000E+000 +6.9900000E+003   !\AUTHOR: AK !\REF:LAM ET AL. SUBMITTED IJCK !\COMMENT
+O+O+M<=>O2+M                                                 +6.1650000E+015 -5.0000000E-001 +0.0000000E+000   !\AUTHOR: AK !\REF: TSANG AND HAMPSON, J. PHYS. CHEM. REF. DATA, 15:1087 (1986) !\COMMENT: 
+ H2 / 2.500 / H2O / 12.000 / AR / 0.830 / HE / 0.830 / !3RD BODY COLLIDER EFFICIENCIES
+O2+H<=>O+OH                                                  +1.1400000E+014 +0.0000000E+000 +1.5286000E+004   !\AUTHOR: AK !\REF: HONG ET AL. PROC. OF THE COMB. INST. 33 (2011) 309-316 !\COMMENT: 2 PARAMETER FIT     ! ER_1706 +10%   (1.04 --> 1.14))
+H+OH+M<=>H2O+M                                               +3.5000000E+022 -2.0000000E+000 +0.0000000E+000   !\AUTHOR: AK !\REF: LI IJCK 36: 566-575, 2004 !\COMMENT:OPTIMISED TO FIT H2 AND CH4 FLAMES DATA 
+ H2 / 0.730 / H2O / 3.650 / AR / 0.380 / !3RD BODY COLLIDER EFFICIENCIES
+O+H2O<=>OH+OH                                                +6.7000000E+007 +1.7040000E+000 +1.4986800E+004   !\AUTHOR: AK !\REF: SUTHERLAND ET AL., 23RD SYMPOSIUM, P. 51 (1990) !\COMMENT:
+O+H+M<=>OH+M                                                 +4.7140000E+018 -1.0000000E+000 +0.0000000E+000   !\AUTHOR: AK !\REF: TSANG AND HAMPSON, J. PHYS. CHEM. REF. DATA, 15:1087 (1986) !\COMMENT: 
+ H2 / 2.500 / H2O / 12.000 / AR / 0.750 / HE / 0.750 / !3RD BODY COLLIDER EFFICIENCIES
+H2O2(+M)<=>OH+OH(+M)                                         +2.0000000E+012 +9.0000000E-001 +4.8749000E+004   !\AUTHOR: AK !\REF: TROE, COMBUST. FLAME, 158:594-601 (2011)!\COMMENT: RATE CONSTANT IS FOR N2, !\COMMENT: EFFICIENCIS OF H2O FROM THE SAME REF,
+LOW /                                                        +2.4900000E+024 -2.3000000E+000 +4.8749000E+004 / !LOW-PRESSURE-LIMIT
+TROE /                                       +4.3000000E-001 +1.0000000E-030 +1.0000000E+030 / !TROE PARAMETERS
+ H2O / 7.650 / N2 / 1.500 / O2 / 1.200 / HE / 0.650 / H2O2 / 7.700 / H2 / 3.700 / !3RD BODY COLLIDER EFFICIENCIES
+H2O2+H<=>H2O+OH                                              +2.4100000E+013 +0.0000000E+000 +3.9700000E+003   !\AUTHOR: AK !\REF:TSANG AND HAMPSON, J. PHYS. CHEM. REF. DATA, 15:1087 (1986) !\COMMENT:
+H2O2+H<=>H2+HO2                                              +2.1500000E+010 +1.0000000E+000 +6.0000000E+003   !\AUTHOR: AK !\REF: ELLINGSON J. PHYS. CHEM. (2007) 111, (51), 13554-13566 !\COMMENT:
+H2O2+O<=>OH+HO2                                              +9.5500000E+006 +2.0000000E+000 +3.9700000E+003   !\AUTHOR: AK !\REF:TSANG AND HAMPSON, J. PHYS. CHEM. REF. DATA, 15:1087 (1986) !\COMMENT:
+H2O2+OH<=>H2O+HO2                                            +1.7400000E+012 +0.0000000E+000 +3.1800000E+002   !\AUTHOR: AK !\REF: HONG ET AL. J. PHYS. CHEM. A 114 (2010) 5718-5727 !\COMMENT:
+DUP 
+H2O2+OH<=>H2O+HO2                                            +7.5900000E+013 +0.0000000E+000 +7.2690000E+003   !\AUTHOR: !\REF: !\COMMENT:
+DUP 
+HO2+H<=>OH+OH                                                +7.0790000E+013 +0.0000000E+000 +2.9500000E+002   !\AUTHOR: KPS !\REF:  !\COMMENT: 
+HO2+H<=>H2+O2                                                +1.1402000E+010 +1.0827000E+000 +5.5378000E+002   !\AUTHOR: AK !\REF:MICHAEL SUTHERLAND 2000 !\COMMENT:
+HO2+O<=>OH+O2                                                +3.2500000E+013 +0.0000000E+000 +0.0000000E+000   !\AUTHOR: AK !\REF:BAULCH ET AL., J. PHYS. CHEM. REF DATA, 21:411 (1992)
+OH+HO2<=>H2O+O2                                              +7.0000000E+012 +0.0000000E+000 -1.0929600E+003   !\AUTHOR: ?? !\REF: hong pci 2013 1015C !\COMMENT: WARNING
+DUP 
+OH+HO2<=>H2O+O2                                              +4.5000000E+014 +0.0000000E+000 +1.0929600E+004   !\AUTHOR: !\REF: !\COMMENT:
+DUP 
+HO2+HO2<=>H2O2+O2                                            +1.0000000E+014 +0.0000000E+000 +1.1040883E+004   !\AUTHOR: AK !\REF: hong pci 2013, kapel 2002 !\COMMENT: WARNING
+DUP 
+HO2+HO2<=>H2O2+O2                                            +1.9000000E+011 +0.0000000E+000 -1.4089248E+003   !\AUTHOR: !\REF: !\COMMENT:
+DUP 
+H+O2(+M)<=>HO2(+M)                                           +4.6500000E+012 +4.4000000E-001 +0.0000000E+000   !\AUTHOR: AK !\REF:FERNANDES PCCP 2008 !COMMENT: Efficiencis of AR and HE derived from seperated reactions,
+LOW /                                                        +1.7370000E+019 -1.2300000E+000 +0.0000000E+000 / !LOW-PRESSURE-LIMIT
+TROE /                                       +6.7000000E-001 +1.0000000E-030 +1.0000000E+030 +1.0000000E+030 / !TROE PARAMETERS
+ H2 / 1.300 / HE / 0.640 / H2O / 10.000 / AR / 0.500 / !3RD BODY COLLIDER EFFICIENCIES
+O+OH+M=HO2+M                             					 +1.0000000E+016 +0.0000000E+000 +0.0000000E+000    !\AUTHOR: ?? !\REF: ?? !COMMENT: From POLIMI 1700
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\END_KINETICS_MODULE: \H2_O2 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\KINETICS_MODULE: \NOx_H2O2_HT
+!     
+NH3=NH2+H				 .3497E+31 -5.224  111163.3 !\AUTHOR: AS !\REF: Stagni, A. et al. React. Chem. Eng. (submitted) (2020). !\COMMENT: T = 800-2500 K fitted
+PLOG / 0.1				 .7230E+30 -5.316  110862.4 /
+PLOG / 1				 .3497E+31 -5.224  111163.3 /
+PLOG / 10				 .1975E+32 -5.155  111887.8 /
+PLOG / 100				 .2689E+32 -4.920  112778.7 /
+NH2+H=NH+H2				 .4000E+14    .000   3650.0 !\AUTHOR: AS !\REF: Davidson, D. F., et al. Int Jour Chem Kinet, 22(5), 513-535 (1990). !\COMMENT:
+NH3+H=H2+NH2				 .1963E+05   2.854   8520.2 !\AUTHOR: AS !\REF: Stagni, A. et al. React. Chem. Eng. (submitted) (2020). !\COMMENT: T = 300-2500 K
+NH3+OH=H2O+NH2				 .1559E+06   2.372    118.9 !\AUTHOR: AS !\REF: Stagni, A. et al. React. Chem. Eng. (submitted) (2020). !\COMMENT: T = 300-2500 K
+NH3+O=NH2+OH				 .4430E+03   3.180   6739.9 !\AUTHOR: AS !\REF: Stagni, A. et al. React. Chem. Eng. (submitted) (2020). !\COMMENT: T = 300-2500 K
+NH3+HO2=NH2+H2O2                         .1173E+01   3.839  17260.0 !\AUTHOR: AS !\REF: Stagni, A. et al. React. Chem. Eng. (submitted) (2020). !\COMMENT: T = 300-2500 K
+NH3+O2=NH2+HO2				 .1415E+11   1.285  55224.0 !\AUTHOR: AS !\REF: Stagni, A. et al. React. Chem. Eng. (submitted) (2020). !\COMMENT: T = 300-2500 K
+NH2+O=NH+OH				 .7000E+13   0.000       .0 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+ DUPLICATE
+NH2+O=NH+OH				 .3300E+09   1.500   5076.8 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+ DUPLICATE
+NH2+OH=NH+H2O                        	 .9600E+07   1.970    670.0 !\AUTHOR: AS !\REF: Mousavipour, S.H. et al. J. Phys. Chem. A 113 12961-12971 (2009) !\COMMENT:
+NH2+NH=NH3+N                             .9600E+04   2.460    107.0 !\AUTHOR: AS !\REF: SJ Klippenstein et al J Phys Chem A 113 10241-10259 (2009).  !\COMMENT:
+NH+NH=NH2+N                          	 .5700E+00   3.880    342.0 !\AUTHOR: AS !\REF: SJ Klippenstein et al J Phys Chem A 113 10241-10259 (2009).  !\COMMENT:
+NH+NH=>N2+H2				 .6260E+13   -.036   -160.9 !\AUTHOR: AS !\REF: SJ Klippenstein et al J Phys Chem A 113 10241-10259 (2009). !\COMMENT: High-Pressure rate, dissociation of N2H2 (10%)
+NH+NH=>N2+H+H				 .5634E+14   -.036   -160.9 !\AUTHOR: AS !\REF: SJ Klippenstein et al J Phys Chem A 113 10241-10259 (2009). !\COMMENT: High-Pressure rate, dissociation of N2H2 (90%)
+NH2+NH2=NH3+NH                           .5640E+01   3.530    550.0 !\AUTHOR: AS !\REF: SJ Klippenstein et al J Phys Chem A 113 10241-10259 (2009). !\COMMENT:
+NH2+NH2=H2NN+H2			 	 .1200E+22  -3.080   3368.0 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+PLOG / 0.1				 .2400E+21  -2.910   2136.0 /
+PLOG / 1.0				 .1200E+22  -3.080   3368.0 /
+PLOG / 10.0				 .2300E+20  -2.540   4182.6 /
+NH2+NO=N2+H2O                            .2600E+20  -2.369    870.0 !\AUTHOR: AS !\REF: Song, S., et al. Int Jour Chem Kinet, 33(11), 715-721. (2001) !\COMMENT: 
+NH2+NO=NNH+OH                            .4300E+11    .294   -866.0 !\AUTHOR: AS !\REF: Song, S., et al. Int Jour Chem Kinet, 33(11), 715-721. (2001) !\COMMENT:
+NH+H=N+H2				 .3010E+14    .000       .0 !\AUTHOR: AS !\REF: Baulch, D. L., Bowman, C. T., et al. J Phys Chem Ref Data, 34(3), 757-1397 (2005). !\COMMENT:
+NH+O=NO+H                                .3000E+14    .000       .0 !\AUTHOR: AS !\REF: Cohen, N.; Westberg, K.R. J. Phys. Chem. Ref. Data 20 1211 - 1311 (1991) !\COMMENT:
+NH+OH=N+H2O				 .2000E+10   1.200       .0 !\AUTHOR: AS !\REF: Cohen, N.; Westberg, K.R. J. Phys. Chem. Ref. Data 20 1211 - 1311 (1991) !\COMMENT:
+NH+O2=NO+OH				 .2010E+16  -1.380   5670.0 !\AUTHOR: AS !\REF: Talipov, M.R. et al. J. Phys. Chem. A 113 6468 - 6476 (2009) !\COMMENT:
+NH+N=N2+H				 .6410E+12    .510     20.0 !\AUTHOR: AS !\REF: Caridade, P.JSB.; Rodrigues, S.PJ.; Sousa, F.; Varandas, A.JC. J. Phys. Chem. A  109 (2005) !\COMMENT:
+NH+NO=N2+OH				 .3635E+11    .361  -2844.3 !\AUTHOR: AS !\REF: Haworth, N.L. et al. J. Phys. Chem. A 107 6792 - 6803 (2003) !\COMMENT:
+!
+! Thermal NOx
+!
+N+OH=NO+H                                .2830E+14    .000       .0 !\AUTHOR: AS !\REF: Baulch, DL et al. J. Phys. Chem. Ref. Data 23 847-1033 (1994) !\COMMENT:
+N+O2=NO+O                                .9027E+10   1.000   6500.0 !\AUTHOR: AS !\REF: Baulch, DL et al. J. Phys. Chem. Ref. Data 23 847-1033 (1994) !\COMMENT:
+N+NO=O+N2                                .4280E+14    .000   1570.0 !\AUTHOR: AS !\REF: Baulch, DL et al. J. Phys. Chem. Ref. Data 23 847-1033 (1994) !\COMMENT:
+!
+! N2Hx
+!
+H2NN=NNH+H				 .9600E+36  -7.570  54841.2 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+PLOG /		       +1.0000000E-001   .5900E+33  -6.990  51791.2 /
+PLOG /		       +1.0000000E+000   .9600E+36  -7.570  54841.2 /
+PLOG /		       +1.0000000E+001   .5000E+37  -7.430  57295.1 /
+DUPLICATE
+H2NN=NNH+H				 .3200E+32  -6.220  52317.7 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+PLOG /		       +1.0000000E-001   .7200E+29  -7.770  50757.9 /
+PLOG /		       +1.0000000E+000   .3200E+32  -6.220  52317.7 /
+PLOG /		       +1.0000000E+001   .5100E+34  -6.520  54215.3 /
+DUPLICATE
+!
+! H2NN
+!
+H2NN+H=NNH+H2				 .4800E+09   1.500   -894.2 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+H2NN+O=NH2+NO				 .3200E+10   1.030   2702.3 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+H2NN+O=OH+NNH				 .3300E+09   1.500   -894.2 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+H2NN+OH=NNH+H2O				 .2400E+07   2.000  -1192.2 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+H2NN+NH2=NH3+NNH			 .1800E+07   1.940  -1152.5 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+H2NN+HO2=NNH+H2O2			 .2900E+05   2.690  -1599.5 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+NNH=N2+H                                 .1000E+10    .000       .0 !\AUTHOR: AS !\REF: SJ Klippenstein LB Harding P Glarborg JA Miller CF 158 (2011) 774-789. !\COMMENT:
+NNH+H=N2+H2                              .2400E+09   1.500   -893.7 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+NNH+O=NH+NO				 .5200E+12    .388   -409.0 !\AUTHOR: AS !\REF: SJ Klippenstein LB Harding P Glarborg JA Miller CF 158 (2011) 774-789. !\COMMENT:
+NNH+O=N2+OH				 .1200E+14    .145   -217.0 !\AUTHOR: AS !\REF: SJ Klippenstein LB Harding P Glarborg JA Miller CF 158 (2011) 774-789. !\COMMENT:
+NNH+OH=N2+H2O                            .5000E+14    .000       .0 !\AUTHOR: AS !\REF: SJ Klippenstein LB Harding P Glarborg JA Miller CF 158 (2011) 774-789. !\COMMENT: Ref 92
+NNH+O2=N2+HO2                            .5600E+15  -0.385    -13.0 !\AUTHOR: AS !\REF: SJ Klippenstein LB Harding P Glarborg JA Miller CF 158 (2011) 774-789. !\COMMENT:
+NNH+NH2=N2+NH3                           .9200E+06   1.940  -1151.9 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+NNH+HO2=N2+H2O2				 .1400E+05   2.690  -1599.5 !\AUTHOR: AS !\REF: Dean AM Bozzelli JW (Gardiner WC) Gas Phase Combustion Chemistry, Springer 2000. !\COMMENT:
+!\END_KINETICS_MODULE: \NOx_H2O2_HT
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!\END_KINETICS_INPUT 
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+END
